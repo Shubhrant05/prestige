@@ -11,7 +11,7 @@ function App() {
     <div>
       <Router>
       <Header/>
-        <Routes>
+        <Routes className= "overflow-y-auto">
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/signin" element={<SignIn />} />

@@ -2,11 +2,13 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRoutes from './routes/user-routes.js'
+import cors from 'cors'
 
 dotenv.config() //used to load environment variables from a .env file into process.env
 
 const app = express();
-app.use(express.json())
+app.use(express.json());
+app.use(cors());
 const PORT = 4000;
 
 //Connecting to MONGODB
