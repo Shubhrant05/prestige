@@ -1,10 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import userRoutes from './routes/user-routes.js'
 
 dotenv.config() //used to load environment variables from a .env file into process.env
 
 const app = express();
+app.use(express.json())
 const PORT = 4000;
 
 //Connecting to MONGODB
@@ -14,6 +16,12 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
     console.log('DB connection error', err)
 })
 
+// routes definition
+app.use('/api/user', userRoutes)
+
+
+// server listening
 app.listen(PORT, () => {
     console.log(`server is running on port ${PORT}`)
 })
+
