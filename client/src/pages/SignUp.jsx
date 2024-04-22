@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
 import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; // Import eye icons
 import { BACKEND_URL } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
@@ -140,6 +140,12 @@ const SignUp = () => {
             Sign Up
           </button>
         </div>
+        <div className='flex gap-2 mt-5'>
+        <p>Have an account?</p>
+        <Link to={'/signin'}>
+          <span className='text-blue-700'>Sign In</span>
+        </Link>
+      </div>
       </form>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; 
+import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignIn = () => {
@@ -10,8 +10,8 @@ const SignIn = () => {
     email: '',
     password: ''
   });
-  const [showPassword, setShowPassword] = useState(false); 
-  const [loading, setLoading] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +27,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
 
     try {
       let res = await axios.post(`${BACKEND_URL}/api/user/signin`, formData);
@@ -44,7 +44,7 @@ const SignIn = () => {
       alert(error.response.data);
       console.error(error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
@@ -77,7 +77,7 @@ const SignIn = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
-              type={showPassword ? 'text' : 'password'} 
+              type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
               value={formData.password}
@@ -89,7 +89,7 @@ const SignIn = () => {
               onClick={togglePasswordVisibility}
               className="absolute top-3 right-3 text-gray-500"
             >
-              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />} 
+              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
             </button>
           </div>
         </div>
@@ -105,6 +105,12 @@ const SignIn = () => {
             )}
             Sign In
           </button>
+        </div>
+        <div className='flex gap-2 mt-5'>
+          <p>Dont have an account?</p>
+          <Link to={'/signup'}>
+            <span className='text-blue-700'>Sign up</span>
+          </Link>
         </div>
       </form>
     </div>
