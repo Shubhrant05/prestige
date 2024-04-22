@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
-import { RiLockPasswordLine } from 'react-icons/ri';
+import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; // Import eye icons
 import { BACKEND_URL } from '../config';
-import  {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
     confirmPassword: ''
   });
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [loading, setLoading] = useState(false); // State to manage loader
 
-  const handleChange =  (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -22,24 +24,29 @@ const SignUp = () => {
     }));
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.debug(formData);
+    setLoading(true); // Start loader when signup is clicked
 
     try {
       let res = await axios.post(`${BACKEND_URL}/api/user/signup`, formData);
 
       if (res.status === 200) {
-        alert('Signup Successfull');
-        navigate('/signin')
-      }
-      else {
+        alert('Signup Successful');
+        navigate('/signin');
+      } else {
         alert(res.data);
         console.log(res);
       }
     } catch (error) {
-      alert(error.response.data)
+      alert(error.response.data);
       console.error(error);
+    } finally {
+      setLoading(false); // Stop loader after signup attempt
     }
   };
 
@@ -88,14 +95,21 @@ const SignUp = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
-              type="password"
+              type={showPassword ? 'text' : 'password'} // Conditionally set input type based on showPassword state
               name="password"
               placeholder="Enter your password"
               value={formData.password}
               onChange={handleChange}
               required
             />
-            <RiLockPasswordLine className="absolute text-gray-500 top-3 right-3" />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute top-3 right-3 text-gray-500"
+            >
+              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />} {/* Toggle between eye icons based on showPassword state */}
+            </button>
+            
           </div>
         </div>
         <div className="mb-4">
@@ -115,9 +129,14 @@ const SignUp = () => {
         </div>
         <div className="flex items-center justify-between">
           <button
-            className=" bg-gray-700 w-full focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline"
+            className="bg-gray-700 w-full focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline relative"
             type="submit"
           >
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-gray-100"></div>
+              </div>
+            )}
             Sign Up
           </button>
         </div>
