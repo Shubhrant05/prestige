@@ -52,11 +52,11 @@ export const signinController = async (req, res) => {
 
       const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
       const { password: pass, ...rest } = validUser._doc;
+      rest.access_token = token;
       res
-        .cookie('access_token', token, { httpOnly: true })
         .status(200)
         .json(rest);
     } catch (error) {
-      res.status(500).json("[SERVER ERROR]"+error);
+      res.status(500).json("[SERVER ERROR] : Error while signing in user "+error);
     }
   };
