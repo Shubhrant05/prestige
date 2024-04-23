@@ -3,15 +3,18 @@ import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { signInStart, signInFailure, signInSuccessfull } from '../Redux/userSlice';
 
 const SignIn = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const {loading} = useSelector(state => state.user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,7 +30,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
+    dispatch(signInStart());
 
     try {
       let res = await axios.post(`${BACKEND_URL}/api/user/signin`, formData);
@@ -35,16 +38,17 @@ const SignIn = () => {
       if (res.status === 200) {
         alert('Signin Successful');
         document.cookie = `access_token=${res.data.access_token}; path=/;`;
-        navigate('/');
+        dispatch(signInSuccessfull(res.data));
+        navigate('/home');
       } else {
         alert(res.data);
         console.log(res);
       }
     } catch (error) {
       alert(error.response.data);
-      console.error(error);
+      dispatch(signInFailure(error.response.data));
     } finally {
-      setLoading(false);
+      console.log('Signin completed');
     }
   };
 

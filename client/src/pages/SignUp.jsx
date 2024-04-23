@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
-import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; // Import eye icons
+import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; 
 import { BACKEND_URL } from '../config';
 import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
@@ -13,8 +13,8 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   });
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
-  const [loading, setLoading] = useState(false); // State to manage loader
+  const [showPassword, setShowPassword] = useState(false); 
+  const [loading, setLoading] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +30,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // Start loader when signup is clicked
+    setLoading(true); 
 
     try {
       let res = await axios.post(`${BACKEND_URL}/api/user/signup`, formData);
@@ -46,7 +46,7 @@ const SignUp = () => {
       alert(error.response.data);
       console.error(error);
     } finally {
-      setLoading(false); // Stop loader after signup attempt
+      setLoading(false); 
     }
   };
 
@@ -95,7 +95,7 @@ const SignUp = () => {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
-              type={showPassword ? 'text' : 'password'} // Conditionally set input type based on showPassword state
+              type={showPassword ? 'text' : 'password'}
               name="password"
               placeholder="Enter your password"
               value={formData.password}
@@ -107,7 +107,7 @@ const SignUp = () => {
               onClick={togglePasswordVisibility}
               className="absolute top-3 right-3 text-gray-500"
             >
-              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />} {/* Toggle between eye icons based on showPassword state */}
+              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />} 
             </button>
             
           </div>
