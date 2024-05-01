@@ -4,6 +4,7 @@ import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
 import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
+import Oauth from '../components/Oauth';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -127,7 +128,7 @@ const SignUp = () => {
             required
           />
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-col">
           <button
             className="bg-gray-700 w-full focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline relative"
             type="submit"
@@ -139,10 +140,11 @@ const SignUp = () => {
             )}
             Sign Up
           </button>
+          <Oauth />
         </div>
         <div className='flex gap-2 mt-5'>
         <p>Have an account?</p>
-        <Link to={'/signin'}>
+        <Link to={'/'}>
           <span className='text-blue-700'>Sign In</span>
         </Link>
       </div>

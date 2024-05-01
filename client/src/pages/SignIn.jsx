@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInFailure, signInSuccessfull } from '../Redux/userSlice';
+import Oauth from '../components/Oauth';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -97,7 +98,7 @@ const SignIn = () => {
             </button>
           </div>
         </div>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between flex-col">
           <button
             className="bg-gray-700 w-full focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline relative"
             type="submit"
@@ -109,6 +110,7 @@ const SignIn = () => {
             )}
             Sign In
           </button>
+          <Oauth/>
         </div>
         <div className='flex gap-2 mt-5'>
           <p>Dont have an account?</p>

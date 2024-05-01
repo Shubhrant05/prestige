@@ -36,7 +36,7 @@ export const signupController = async (req, res) => {
         res.status(500).json('[SERVER ERROR] Error while creating user:' + err);
     });
 
-}
+};
 
 export const signinController = async (req, res) => {
     const { email, password } = req.body;
@@ -59,4 +59,36 @@ export const signinController = async (req, res) => {
     } catch (error) {
       res.status(500).json("[SERVER ERROR] : Error while signing in user "+error);
     }
-  };
+};
+
+export const googleController = async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      const { password: pass, ...rest } = user._doc;
+      rest.access_token = token;
+      res
+        .status(200)
+        .json(rest);
+    } else {
+      const generatedPassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      const hashedPassword = bcryptjs.hashSync(generatedPassword, 10);
+      let newUser = new User({
+        name: req.body.name.split(' ').join('').toLowerCase() + Math.random().toString(36).slice(-4),
+        email: req.body.email,
+        password: hashedPassword,
+        avatar: req.body.photo,
+      });
+      await newUser.save();              
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET);
+      const { password: pass, ...rest } = newUser._doc;
+      rest.access_token = token;
+      res
+        .status(200)
+        .json(rest);
+    }
+  } catch (error) {
+    res.status(500).json("[SERVER ERROR] : Error while signing in user with GOOGLE "+error);
+  }
+};
