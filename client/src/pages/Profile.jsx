@@ -1,16 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiOutlineLogout, HiOutlinePencilAlt } from 'react-icons/hi';
 import { TiDeleteOutline } from 'react-icons/ti';
 import { useSelector } from 'react-redux';
+import { useRef } from 'react';
+import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage';
+import { app } from "../firebase";
 
 const Profile = () => {
+  const fileInputRef = useRef(null);
   const currentUser = useSelector((state) => state.user.currentUser);
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
   const [password, setPassword] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [file, setFile] = useState(undefined);
+  const [filePerc, setFilePerc] = useState(0);
+  const [fileUploadError, setFileUploadError] = useState(false);
+  const [formData, setFormData] = useState({});
 
+  useEffect(() => {
+    if (file) {
+      handleFileUpload(file)
+    }
+  }, [file])
+
+  const handleFileUpload = (file) => {
+    const storage = getStorage(app);
+    const fileName = new Date().getTime() + file.name;
+    const storageRef = ref(storage, fileName);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setFilePerc(Math.round(progress));
+      },
+      (error) => {
+        setFileUploadError(true);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) =>
+          setFormData({ ...formData, avatar: downloadURL })
+        );
+      }
+    );
+  };
   const handleLogout = () => {
     // Logout functionality
   };
@@ -37,9 +73,25 @@ const Profile = () => {
         </button>
       </div>
       <div>
+        <input type="file" accept="image/*" className="hidden" ref={fileInputRef} onChange={(e) => {
+          setFile(e.target.files[0])
+        }} />
         <div className="flex justify-center mb-4">
-          <img src={currentUser.avatar} alt="Profile" className="w-32 h-32 rounded-full border border-gray-300" />
+          <img onClick={() => { fileInputRef.current.click() }} src={currentUser.avatar} alt="Profile" className="w-32 h-32 rounded-full border border-gray-300" />
         </div>
+        <p className='text-sm self-center'>
+          {fileUploadError ? (
+            <span className='text-red-700'>
+              Error Image upload (image must be less than 2 mb)
+            </span>
+          ) : filePerc > 0 && filePerc < 100 ? (
+            <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
+          ) : filePerc === 100 ? (
+            <span className='text-green-700'>{console.log(file)}Image successfully uploaded!</span>
+          ) : (
+            ''
+          )}
+        </p>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700">Name</label>
           {isEditing ? (
