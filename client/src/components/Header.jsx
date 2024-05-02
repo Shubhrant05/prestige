@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaBars } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+  const currentuser = useSelector(state => state.user.currentUser);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -11,7 +13,7 @@ const Header = () => {
   };
 
   const handleLinkClick = (path) => {
-    setIsOpen(false); 
+    setIsOpen(false);
     navigate(path);
   };
 
@@ -20,7 +22,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <div className="mr-4">
-            <Link to="/" className="text-xl font-bold">
+            <Link to="/home" className="text-xl font-bold">
               Prestige Properties
             </Link>
           </div>
@@ -34,14 +36,22 @@ const Header = () => {
           </div>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <Link to="/" className="hover:text-gray-300">
+          <Link to="/home" className="hover:text-gray-300">
             Home
           </Link>
           <Link to="/about" className="hover:text-gray-300">
             About
           </Link>
-          <Link to="/signin" className="hover:text-gray-300">
-            Sign In
+          <Link
+            to="/profile"
+            className="py-2 hover:text-gray-300"
+            onClick={() => handleLinkClick('/')}
+          >{
+              currentuser ?
+                (<img src={currentuser.avatar} alt="profile pic" class="rounded-full w-10 h-10 object-cover" />
+                ) :
+                ("Sign In")
+            }
           </Link>
         </div>
         <div className="md:hidden">
@@ -51,7 +61,7 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden bg-gray-800">
           <div className="flex flex-col items-center">
-          <div className="relative">
+            <div className="relative">
               <input
                 type="text"
                 placeholder="Search"
@@ -60,7 +70,7 @@ const Header = () => {
               <FaSearch className="absolute top-0 right-0 mt-2 mr-2 text-white" />
             </div>
             <Link
-              to="/"
+              to="/home"
               className="py-2 hover:text-gray-300"
               onClick={() => handleLinkClick('/')}
             >
@@ -74,14 +84,18 @@ const Header = () => {
               About
             </Link>
             <Link
-              to="/signin"
+              to="/profile"
               className="py-2 hover:text-gray-300"
-              onClick={() => handleLinkClick('/signin')}
-            >
-              Sign In
+              onClick={() => handleLinkClick('/')}
+            >{
+                currentuser ?
+                  (<img src={currentuser.avatar} alt="profile pic" class="rounded-full w-10 h-10 object-cover" />
+                  ) :
+                  ("Sign In")
+              }
             </Link>
-            
-            
+
+
           </div>
         </div>
       )}
