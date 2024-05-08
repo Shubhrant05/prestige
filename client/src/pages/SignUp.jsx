@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../config';
 import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import Oauth from '../components/Oauth';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -37,14 +38,14 @@ const SignUp = () => {
       let res = await axios.post(`${BACKEND_URL}/api/user/signup`, formData);
 
       if (res.status === 200) {
-        alert('Signup Successful');
+        toast('Signup Successful');
         navigate('/signin');
       } else {
-        alert(res.data);
+        toast(res.data);
         console.log(res);
       }
     } catch (error) {
-      alert(error.response.data);
+      toast(error.response.data);
       console.error(error);
     } finally {
       setLoading(false); 

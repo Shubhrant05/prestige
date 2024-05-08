@@ -7,10 +7,12 @@ import SignUp from './pages/SignUp';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
 import Profile from './pages/Profile';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   return (
     <div>
+      <Toaster/>
       <Router>
         <Header />
         <Routes className="overflow-y-auto">

@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInFailure, signInSuccessfull } from '../Redux/userSlice';
 import Oauth from '../components/Oauth';
+import toast from 'react-hot-toast';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -37,16 +38,16 @@ const SignIn = () => {
       let res = await axios.post(`${BACKEND_URL}/api/user/signin`, formData);
 
       if (res.status === 200) {
-        alert('Signin Successful');
+        toast('Signin Successful');
         document.cookie = `access_token=${res.data.access_token}; path=/;`;
         dispatch(signInSuccessfull(res.data));
         navigate('/home');
       } else {
-        alert(res.data);
+        toast(res.data);
         console.log(res);
       }
     } catch (error) {
-      alert(error.response.data);
+      toast(error.response.data);
       dispatch(signInFailure(error.response.data));
     } finally {
       console.log('Signin completed');
