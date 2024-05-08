@@ -77,7 +77,7 @@ const Profile = () => {
           setFile(e.target.files[0])
         }} />
         <div className="flex justify-center mb-4">
-          <img onClick={() => { fileInputRef.current.click() }} src={currentUser.avatar} alt="Profile" className="w-32 h-32 rounded-full border border-gray-300" />
+          <img onClick={() => { fileInputRef.current.click() }} src={formData.avatar || currentUser.avatar} alt="Profile" className="w-32 h-32 rounded-full border border-gray-300" />
         </div>
         <p className='text-sm self-center'>
           {fileUploadError ? (
