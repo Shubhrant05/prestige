@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import userRoutes from './routes/user-routes.js'
+import listingRoutes from './routes/listing-routes.js'
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 
@@ -23,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI).then(() => {
 
 // routes definition
 app.use('/api/user', userRoutes)
-
+app.use('/api/listing', listingRoutes)
 
 // server listening
 app.listen(PORT, () => {
