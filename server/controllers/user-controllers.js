@@ -122,4 +122,17 @@ export const updateUserController = async (req, res) => {
   } catch (error) {
     res.status(500).json("[SERVER ERROR] : Error while updating user " + error);
   }
-}
+};
+
+export const deleteUserController = async (req, res) => {
+  if (req.user.id !== req.params.id) {
+    return res.status(403).json('Please sign-in to delete your account.');
+  }
+
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.status(200).json('User deleted successfully');
+  } catch (error) {
+    res.status(500).json("[SERVER ERROR] : Error while deleting user " + error);
+  } 
+};
