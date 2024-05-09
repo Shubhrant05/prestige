@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRef } from 'react';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage';
+import { BiLogOut, BiTrash } from 'react-icons/bi';
 import { app } from "../firebase";
 import { Link } from 'react-router-dom';
-import { updateUserStart, updateUserSuccessfull, updateUserFailure } from '../Redux/userSlice';
+import {
+  updateUserStart, updateUserSuccessfull, updateUserFailure,
+  deleteUserStart, deleteUserSuccessfull, deleteUserFailure
+} from '../Redux/userSlice';
 import { useDispatch } from 'react-redux';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
@@ -21,10 +25,10 @@ const Profile = () => {
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({
-    username:  currentUser.username,
-    email:  currentUser.email,
+    username: currentUser.username,
+    email: currentUser.email,
   });
-  console.log(formData)
+  
   useEffect(() => {
     if (file) {
       handleFileUpload(file)
@@ -63,8 +67,8 @@ const Profile = () => {
     try {
       dispatch(updateUserStart());
 
-      const res = await axios.post(`${BACKEND_URL}/api/user/update/${currentUser._id}`, {...formData, access_token: document.cookie.split('=')[1]});
-      if(res.status === 200) {
+      const res = await axios.post(`${BACKEND_URL}/api/user/update/${currentUser._id}`, { ...formData, access_token: document.cookie.split('=')[1] });
+      if (res.status === 200) {
         toast.success('Profile updated successfully')
         dispatch(updateUserSuccessfull(res.data))
       }
@@ -87,8 +91,25 @@ const Profile = () => {
     // Save profile functionality
   };
 
-  const handleDeleteUser = () => {
-    // Delete account functionality
+  const handleDeleteUser = async (e) => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await axios.delete(`${BACKEND_URL}/api/user/delete/${currentUser._id}`,
+        { data: { access_token: document.cookie.split('=')[1] } });
+      if (res.status === 200) {
+        document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        toast.success('Profile deleted successfully')
+        dispatch(deleteUserSuccessfull())
+      }
+      else {
+        toast.error(res.data)
+        dispatch(deleteUserFailure(res.data))
+        return;
+      }
+
+    } catch (error) {
+      dispatch(deleteUserFailure(error.response.data))
+    }
   };
 
   const handleSignOut = () => {
@@ -166,15 +187,15 @@ const Profile = () => {
       <div className='flex justify-between mt-5'>
         <span
           onClick={handleDeleteUser}
-          className='text-red-700 cursor-pointer'
+          className='text-red-700 cursor-pointer flex gap-2 items-center font-semibold'
         >
-          Delete account
+          <BiTrash /> Delete account
         </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
-          Sign out
+        <span onClick={handleSignOut} className='text-red-700 cursor-pointer flex gap-2 items-center font-semibold'>
+          <BiLogOut /> Sign out
         </span>
       </div>
-        <p className='text-red-700 mt-5'>{error? error : ''}</p>
+      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
 
     </div>
   );
