@@ -7,7 +7,8 @@ import { app } from "../firebase";
 import { Link } from 'react-router-dom';
 import {
   updateUserStart, updateUserSuccessfull, updateUserFailure,
-  deleteUserStart, deleteUserSuccessfull, deleteUserFailure
+  deleteUserStart, deleteUserSuccessfull, deleteUserFailure,
+  signOutStart, signOutSuccessfull, signOutFailure
 } from '../Redux/userSlice';
 import { useDispatch } from 'react-redux';
 import { BACKEND_URL } from '../config';
@@ -18,9 +19,6 @@ const Profile = () => {
   const dispatch = useDispatch();
   const fileRef = useRef(null);
   const { currentUser, loading, error } = useSelector((state) => state.user);
-  const [password, setPassword] = useState('');
-  const [isEditing, setIsEditing] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
@@ -28,7 +26,7 @@ const Profile = () => {
     username: currentUser.username,
     email: currentUser.email,
   });
-  
+
   useEffect(() => {
     if (file) {
       handleFileUpload(file)
@@ -82,14 +80,6 @@ const Profile = () => {
     }
   };
 
-  const handleEditProfile = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveProfile = () => {
-    setIsEditing(false);
-    // Save profile functionality
-  };
 
   const handleDeleteUser = async (e) => {
     try {
@@ -112,9 +102,26 @@ const Profile = () => {
     }
   };
 
-  const handleSignOut = () => {
-    // Sign out functionality
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutStart());
+      document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      const res = await axios.get(`${BACKEND_URL}/api/user/signout`);
+      if(res.status === 200){
+        toast.success('Signed out successfully')
+        dispatch(signOutSuccessfull())
+      }
+      else{
+        toast.error(res.data)
+        dispatch(signOutFailure(res.data))
+        return;
+      }
+    } catch (error) {
+      dispatch(signOutFailure(error.response.data))
+    }
+
   }
+  
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
