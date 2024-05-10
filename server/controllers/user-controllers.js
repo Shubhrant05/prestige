@@ -2,7 +2,7 @@ import User from '../models/user-model.js';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-
+import Listing from '../models/listing-model.js';
 dotenv.config();
 
 export const signupController = async (req, res) => {
@@ -145,5 +145,19 @@ export const signOutController = async (req, res) => {
     res.status(200).json('User signed out successfully'); 
   } catch (error) {
     res.status(500).json("[SERVER ERROR] : Error while signing out user " + error);
+  }
+};
+
+export const getListingsController = async (req, res) => {
+  if(req.user.id !== req.params.id){
+    return res.status(403).json('Please sign-in to view your listings.');
+  }
+  else{
+    try {
+      const listings = await Listing.find({ userRef: req.params.id });
+      res.status(200).json(listings);
+    } catch (error) {
+      res.status(500).json("[SERVER ERROR] : Error while fetching listings " + error);
+    }
   }
 }

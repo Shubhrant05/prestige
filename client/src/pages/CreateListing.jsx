@@ -138,9 +138,10 @@ export default function CreateListing() {
             const body = {
                 ...formData,
                 userRef: currentUser._id,
+                access_token: document.cookie.split('=')[1],
             }
-            const res = await axios(`${BACKEND_URL}/api/listing/create`, body);
-            const data = await res.json();
+            const res = await axios.post(`${BACKEND_URL}/api/listing/create`, body);
+            const data = res.data;
             setLoading(false);
             if (data.success === false) {
                 setError(data.message);
@@ -156,7 +157,7 @@ export default function CreateListing() {
             <h1 className='text-3xl font-semibold text-center my-7'>
                 Add A Home
             </h1>
-            <form onSubmit={handleSubmit} className='flex flex-row gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
                 <div className='flex flex-col gap-4 flex-1'>
                     <input
                         type='text'
