@@ -33,6 +33,7 @@ export default function CreateListing() {
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [filePerc, setFilePerc] = useState(0);
 
     const handleImageSubmit = (e) => {
         if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -73,7 +74,7 @@ export default function CreateListing() {
                 (snapshot) => {
                     const progress =
                         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(`Upload is ${progress}% done`);
+                    setFilePerc(Math.round(progress));
                 },
                 (error) => {
                     reject(error);
@@ -155,7 +156,7 @@ export default function CreateListing() {
             <h1 className='text-3xl font-semibold text-center my-7'>
                 Add A Home
             </h1>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-row gap-4'>
                 <div className='flex flex-col gap-4 flex-1'>
                     <input
                         type='text'
@@ -312,6 +313,19 @@ export default function CreateListing() {
                         <span className='font-normal text-gray-600 ml-2'>
                             The first image will be the cover (max 6)
                         </span>
+                        <p className='text-sm self-center'>
+                            {imageUploadError ? (
+                                <span className='text-red-700'>
+                                    Error Image upload (image must be less than 2 mb)
+                                </span>
+                            ) : filePerc > 0 && filePerc < 100 ? (
+                                <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
+                            ) : filePerc === 100 ? (
+                                <span className='text-green-700'>Image successfully uploaded!</span>
+                            ) : (
+                                ''
+                            )}
+                        </p>
                     </p>
                     <div className='flex gap-4'>
                         <input
