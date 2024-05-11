@@ -144,6 +144,22 @@ const Profile = () => {
     }
   };
 
+  const handleListingDelete = async (id) => {
+    try {
+      const res = await axios.delete(`${BACKEND_URL}/api/listing/delete/${id}`, { data: { access_token: document.cookie.split('=')[1] } });
+      if (res.status === 200) {
+        toast.success('Listing deleted successfully')
+        setShowListing(showListing.filter(listing => listing._id !== id))
+      }
+      else {
+        toast.error(res.data)
+        return;
+      }
+    } catch (error) {
+      toast.error(error.response.data)
+    }
+  }
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -244,7 +260,7 @@ const Profile = () => {
               key={listing._id}
               className='border rounded-lg p-3 flex justify-between items-center gap-4'
             >
-              <PropertyCard property={listing} />
+              <PropertyCard property={listing} onDelete={() => handleListingDelete(listing._id)} />
             </div>
           ))}
         </div>

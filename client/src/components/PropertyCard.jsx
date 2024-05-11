@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 
-const PropertyCard = ({ property}) => {
+const PropertyCard = ({ property, onDelete }) => {
   return (
     <div className="w-full rounded overflow-hidden shadow-lg">
       <div className="flex items-center">
@@ -28,18 +28,21 @@ const PropertyCard = ({ property}) => {
           )}
         </div>
       </div>
-      <div className="flex justify-between mt-4">
+      <div className="flex flex-row gap-1 justify-between mt-4">
         <button
-          // onClick={() => onDelete(property._id)}
-          className="text-red-700 uppercase"
+          onClick={() => onDelete(property._id)}
+          className="text-white w-1/2 uppercase items-center bg-red-700 px-4 py-1 rounded focus:outline-none focus:shadow-outline hover:bg-red-800"
         >
-          <FaTrash className="mr-1" /> Delete
+          Delete
         </button>
-        <Link to={`/update-listing/${property._id}`}>
-          <button className="text-green-700 uppercase">
-            <FaEdit className="mr-1" /> Edit
-          </button>
-        </Link>
+        <button
+          className="text-white w-1/2 uppercase items-center bg-green-700 px-4 py-1 rounded focus:outline-none focus:shadow-outline hover:bg-green-800"
+        >
+          <Link to={`/update-listing/${property._id}`}>
+             Edit
+          </Link>
+        </button>
+
       </div>
     </div>
   );
