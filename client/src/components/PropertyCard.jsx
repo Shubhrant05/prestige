@@ -35,14 +35,14 @@ const PropertyCard = ({ property, onDelete }) => {
         >
           Delete
         </button>
-        <button
-          className="text-white w-1/2 uppercase items-center bg-green-700 px-4 py-1 rounded focus:outline-none focus:shadow-outline hover:bg-green-800"
-        >
-          <Link to={`/update-listing/${property._id}`}>
-             Edit
-          </Link>
-        </button>
+        <Link to={`/update-listing/${property._id}`} className="text-white w-1/2 uppercase items-center bg-blue-700 px-4 py-1 rounded focus:outline-none focus:shadow-outline hover:bg-blue-800 text-center">
+          <button
+          >
 
+            EDIT
+
+          </button>
+        </Link>
       </div>
     </div>
   );
