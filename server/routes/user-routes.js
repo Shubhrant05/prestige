@@ -9,5 +9,5 @@ router.post('/google', googleController)
 router.post('/update/:id', verifyUser, updateUserController)
 router.delete('/delete/:id', verifyUser, deleteUserController)
 router.get('/signout', signOutController)
-router.get('/get-listings/:id', verifyUser, getListingsController)
+router.post('/get-listings/:id', verifyUser, getListingsController)
 export default router

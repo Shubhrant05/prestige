@@ -14,6 +14,7 @@ import { useDispatch } from 'react-redux';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import PropertyCard from '../components/PropertyCard';
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const Profile = () => {
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
   const [fileUploadError, setFileUploadError] = useState(false);
+  const [showListingError, setShowListingError] = useState(false);
+  const [showListing, setShowListing] = useState([]);
   const [formData, setFormData] = useState({
     username: currentUser.username,
     email: currentUser.email,
@@ -80,7 +83,6 @@ const Profile = () => {
     }
   };
 
-
   const handleDeleteUser = async (e) => {
     try {
       dispatch(deleteUserStart());
@@ -107,11 +109,11 @@ const Profile = () => {
       dispatch(signOutStart());
       document.cookie = "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       const res = await axios.get(`${BACKEND_URL}/api/user/signout`);
-      if(res.status === 200){
+      if (res.status === 200) {
         toast.success('Signed out successfully')
         dispatch(signOutSuccessfull())
       }
-      else{
+      else {
         toast.error(res.data)
         dispatch(signOutFailure(res.data))
         return;
@@ -120,8 +122,28 @@ const Profile = () => {
       dispatch(signOutFailure(error.response.data))
     }
 
-  }
-  
+  };
+
+  const handleShowListing = async (e) => {
+    try {
+      setShowListingError(false);
+      const body = {
+        access_token: document.cookie.split('=')[1]
+      }
+      const res = await axios.post(`${BACKEND_URL}/api/user/get-listings/${currentUser._id}`, body);
+      if (res.status === 200) {
+        setShowListing(res.data)
+        console.log(res.data)
+      }
+      else {
+        setShowListingError(true);
+        return;
+      }
+    } catch (error) {
+      setShowListingError(true);
+    }
+  };
+
   return (
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
@@ -184,13 +206,21 @@ const Profile = () => {
         >
           {loading ? 'Loading...' : 'Update'}
         </button>
+      </form>
+      <div className='flex flex-row gap-1 justify-between mt-4'>
         <Link
-          className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
+          className='bg-green-700 text-white w-1/2 p-3 rounded-lg uppercase text-center hover:opacity-95'
           to={'/create-listing'}
         >
           Create Listing
         </Link>
-      </form>
+        <button
+          className='bg-white text-green-700 border w-1/2 border-green-700 p-3 rounded-lg uppercase text-center hover:opacity-95'
+          onClick={() => handleShowListing()}
+        >
+          Show Listing
+        </button>
+      </div>
       <div className='flex justify-between mt-5'>
         <span
           onClick={handleDeleteUser}
@@ -204,6 +234,21 @@ const Profile = () => {
       </div>
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
 
+      {showListing && showListing.length > 0 && (
+        <div className='flex flex-col gap-4'>
+          <h1 className='text-center mt-7 text-2xl font-semibold'>
+            Your Listings
+          </h1>
+          {showListing.map((listing) => (
+            <div
+              key={listing._id}
+              className='border rounded-lg p-3 flex justify-between items-center gap-4'
+            >
+              <PropertyCard property={listing} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
