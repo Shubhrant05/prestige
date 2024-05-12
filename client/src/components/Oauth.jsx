@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signInSuccessfull } from '../Redux/userSlice';
 import { BACKEND_URL } from '../config';
+import toast from 'react-hot-toast';
 
 const Oauth = () => {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ const Oauth = () => {
       document.cookie = `access_token=${res.data.access_token}; path=/;`;
       navigate('/home');
     } catch (error) {
+      toast.error('Could not sign in with google');
       console.log('could not sign in with google', error);
     }
   };

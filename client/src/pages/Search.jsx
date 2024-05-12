@@ -124,8 +124,8 @@ export default function Search() {
         const urlParams = new URLSearchParams(location.search);
         urlParams.set('startIndex', startIndex);
         const searchQuery = urlParams.toString();
-        const res = await fetch(`/api/listing/get?${searchQuery}`);
-        const data = await res.json();
+        const res = await axios.get(`${BACKEND_URL}/api/listing/get?${searchQuery}`);
+        const data = await res.data;
         if (data.length < 9) {
             setShowMore(false);
         }

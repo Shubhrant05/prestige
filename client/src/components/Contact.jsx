@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
+import toast from 'react-hot-toast';
 
 
 const Contact = ({ listing }) => {
@@ -21,6 +22,7 @@ const Contact = ({ listing }) => {
         const data = await res.data;
         setLandlord(data);
       } catch (error) {
+        toast.error('Something went wrong!');
         console.log(error);
       }
     };

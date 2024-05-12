@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 export default function CreateListing() {
     const { currentUser } = useSelector((state) => state.user);
@@ -316,8 +317,9 @@ export default function CreateListing() {
                         </span>
                         <p className='text-sm self-center'>
                             {imageUploadError ? (
+                                
                                 <span className='text-red-700'>
-                                    Error Image upload (image must be less than 2 mb)
+                                    Error Image upload (image must be less than 2 mb){toast.error('Error Image upload (image must be less than 2 mb)')}
                                 </span>
                             ) : filePerc > 0 && filePerc < 100 ? (
                                 <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
@@ -347,7 +349,7 @@ export default function CreateListing() {
                         </button>
                     </div>
                     <p className='text-red-700 text-sm'>
-                        {imageUploadError && imageUploadError}
+                        {imageUploadError && imageUploadError}{imageUploadError && toast.error(imageUploadError)}
                     </p>
                     {formData.imageUrls.length > 0 &&
                         formData.imageUrls.map((url, index) => (
@@ -375,7 +377,7 @@ export default function CreateListing() {
                     >
                         {loading ? 'Creating...' : 'Create listing'}
                     </button>
-                    {error && <p className='text-red-700 text-sm'>{error}</p>}
+                    {error && <p className='text-red-700 text-sm'>{error}</p>}{error && toast.error(error)}
                 </div>
             </form>
         </main>
