@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ListingItem from '../components/PropertyCard';
+import ListingItem from '../components/ListingItem';
 import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import { BACKEND_URL } from '../config';
 
 export default function Search() {
     const location = useLocation();
@@ -54,8 +56,8 @@ export default function Search() {
             setLoading(true);
             setShowMore(false);
             const searchQuery = urlParams.toString();
-            const res = await fetch(`/api/listing/get?${searchQuery}`);
-            const data = await res.json();
+            const res = await axios.get(`${BACKEND_URL}/api/listing/get?${searchQuery}`);
+            const data = await res.data;
             if (data.length > 8) {
                 setShowMore(true);
             } else {
