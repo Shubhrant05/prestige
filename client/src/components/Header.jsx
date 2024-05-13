@@ -76,14 +76,6 @@ const Header = () => {
       {isOpen && (
         <div className="md:hidden bg-gray-800">
           <div className="flex flex-col items-center">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search"
-                className="px-3 py-1 rounded-md bg-gray-700 focus:outline-none focus:bg-gray-600 text-white"
-              />
-              <FaSearch className="absolute top-0 right-0 mt-2 mr-2 text-white" />
-            </div>
             <Link
               to="/home"
               className="py-2 hover:text-gray-300"
