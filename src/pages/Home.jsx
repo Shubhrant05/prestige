@@ -8,7 +8,7 @@ import ListingItem from '../components/ListingItem';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
 import { toast } from 'react-hot-toast';
-import banner_bg from '../Assets/banner_bg.avif'
+
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
   const [saleListings, setSaleListings] = useState([]);

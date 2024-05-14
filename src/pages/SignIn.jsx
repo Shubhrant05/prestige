@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+import {  RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';

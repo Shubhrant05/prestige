@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
-import { RiLockPasswordLine, RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; 
+import {  RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; 
 import { BACKEND_URL } from '../config';
 import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';

@@ -4,12 +4,11 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/bundle';
-import { FaBath, FaBed, FaChair, FaMapMarkedAlt, FaMapMarkerAlt, FaParking, FaShare } from 'react-icons/fa';
+import { FaBath, FaBed, FaChair, FaMapMarkerAlt, FaParking, FaShare } from 'react-icons/fa';
 import Contact from '../components/Contact';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
 import { useSelector } from 'react-redux';
-import toast from 'react-hot-toast';
 
 SwiperCore.use([Navigation]);
 

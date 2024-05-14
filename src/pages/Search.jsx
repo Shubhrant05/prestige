@@ -4,7 +4,6 @@ import ListingItem from '../components/ListingItem';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
-import Select from 'react-select';
 
 export default function Search() {
     const location = useLocation();
