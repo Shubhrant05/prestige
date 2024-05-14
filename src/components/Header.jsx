@@ -26,7 +26,7 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-black  text-white p-4 z-100">
+    <header className="bg-black  text-white p-4 z-111">
       <div className="container mx-auto flex justify-between items-center ">
         <div className="flex items-center">
           <div className="mr-4">

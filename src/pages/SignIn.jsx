@@ -64,7 +64,6 @@ const SignIn = () => {
           filter: 'blur(2px)',
           opacity: 0.5,
           position: 'fixed',
-          top: 2,
           left: 0,
           width: '100%',
           height: '100%',

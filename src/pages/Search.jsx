@@ -4,6 +4,7 @@ import ListingItem from '../components/ListingItem';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { BACKEND_URL } from '../config';
+import Select from 'react-select';
 
 export default function Search() {
     const location = useLocation();
@@ -154,41 +155,65 @@ export default function Search() {
                             <input
                                 type='checkbox'
                                 id='all'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'all'}
                             />
-                            <span>Rent & Sale</span>
+                            <label
+                                htmlFor='all'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.type === 'all' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Rent & Sell
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='rent'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'rent'}
                             />
-                            <span>Rent</span>
+                            <label
+                                htmlFor='rent'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.type === 'rent' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Rent
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='sale'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.type === 'sale'}
                             />
-                            <span>Sale</span>
+                            <label
+                                htmlFor='sale'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.type === 'sale' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Sell
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='offer'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.offer}
                             />
-                            <span>Offer</span>
+                            <label
+                                htmlFor='offer'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.offer ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Offer
+                            </label>
                         </div>
                     </div>
                     <div className='flex gap-2 flex-wrap items-center'>
@@ -197,38 +222,52 @@ export default function Search() {
                             <input
                                 type='checkbox'
                                 id='parking'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.parking}
                             />
-                            <span>Parking</span>
+                            <label
+                                htmlFor='parking'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.parking ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Parking Spot
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='furnished'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={sidebardata.furnished}
                             />
-                            <span>Furnished</span>
+                            <label
+                                htmlFor='furnished'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.furnished ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Furnished
+                            </label>
                         </div>
                     </div>
-                    <div className='flex items-center gap-2'>
-                        <label className='font-semibold'>Sort:</label>
+                    <div className="flex items-center gap-2">
+                        <label className="font-semibold">Sort:</label>
                         <select
                             onChange={handleChange}
                             defaultValue={'created_at_desc'}
                             id='sort_order'
-                            className='border rounded-lg p-3'
+                            className='border-black-2 p-2 appearance-none focus:outline-none focus:ring-2 focus:ring-gray-400 w-full'
                         >
-                            <option value='regularPrice_desc'>Price high to low</option>
-                            <option value='regularPrice_asc'>Price low to hight</option>
+                            <option value='regularPrice_desc' style={{
+                                padding:3,
+                                border: 'solid'}}>Price high to low</option>
+                            <option value='regularPrice_asc'>Price low to high</option>
                             <option value='createdAt_desc'>Latest</option>
                             <option value='createdAt_asc'>Oldest</option>
                         </select>
                     </div>
-                    <button className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95'>
+                    <button className='bg-black text-white p-3 rounded-lg uppercase hover:opacity-95'>
                         Search
                     </button>
                 </form>
