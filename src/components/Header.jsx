@@ -26,11 +26,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="bg-black  text-white p-4 z-100">
+      <div className="container mx-auto flex justify-between items-center ">
         <div className="flex items-center">
           <div className="mr-4">
-            <Link to="/home" className="text-xl font-bold">
+            <Link to="/" className="text-xl font-bold">
               Prestige Properties
             </Link>
           </div>
@@ -51,7 +51,7 @@ const Header = () => {
           </form>
         </div>
         <div className="hidden md:flex items-center space-x-4">
-          <Link to="/home" className="hover:text-gray-300">
+          <Link to="/" className="hover:text-gray-300">
             Home
           </Link>
           <Link to="/about" className="hover:text-gray-300">
@@ -60,7 +60,7 @@ const Header = () => {
           <Link
             to="/profile"
             className="py-2 hover:text-gray-300"
-            onClick={() => handleLinkClick('/')}
+            onClick={() => handleLinkClick('/signin')}
           >{
               currentuser ?
                 (<img src={currentuser.avatar} alt="profile pic" class="rounded-full w-10 h-10 object-cover" />
@@ -74,10 +74,10 @@ const Header = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden bg-gray-800">
+        <div className="md:hidden bg-black">
           <div className="flex flex-col items-center">
             <Link
-              to="/home"
+              to="/"
               className="py-2 hover:text-gray-300"
               onClick={() => handleLinkClick('/')}
             >
@@ -93,7 +93,7 @@ const Header = () => {
             <Link
               to="/profile"
               className="py-2 hover:text-gray-300"
-              onClick={() => handleLinkClick('/')}
+              onClick={() => handleLinkClick('/signin')}
             >{
                 currentuser ?
                   (<img src={currentuser.avatar} alt="profile pic" class="rounded-full w-10 h-10 object-cover" />

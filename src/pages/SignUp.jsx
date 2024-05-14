@@ -6,6 +6,7 @@ import { useNavigate, Link} from 'react-router-dom';
 import axios from 'axios';
 import Oauth from '../components/Oauth';
 import toast from 'react-hot-toast';
+import auth_bg from '../Assets/auth_background.jpg'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -54,14 +55,28 @@ const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5" onSubmit={handleSubmit}>
-        <h2 className="text-center text-3xl text-bold mb-6">Sign Up</h2>
+      <div
+        className="bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${auth_bg})`,
+          filter: 'blur(2px)',
+          opacity: 0.5,
+          position: 'fixed',
+          top: 2,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          
+        }}
+      ></div>
+      <form className="rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5 z-10" onSubmit={handleSubmit}>
+        <h2 className="text-center text-black text-3xl text-bold mb-6">Sign Up</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="name">
             Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
             id="name"
             type="text"
             name="name"
@@ -72,12 +87,12 @@ const SignUp = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <div className="relative">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
               id="email"
               type="email"
               name="email"
@@ -90,12 +105,12 @@ const SignUp = () => {
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <div className="relative">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
               id="password"
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -115,11 +130,11 @@ const SignUp = () => {
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="confirmPassword">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="confirmPassword">
             Confirm Password
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
             id="confirmPassword"
             type="password"
             name="confirmPassword"
@@ -144,11 +159,11 @@ const SignUp = () => {
           <Oauth />
         </div>
         <div className='flex gap-2 mt-5'>
-        <p>Have an account?</p>
-        <Link to={'/'}>
-          <span className='text-blue-700'>Sign In</span>
-        </Link>
-      </div>
+          <p>Have an account?</p>
+          <Link to={'/signin'}>
+            <span className='text-blue-700'>Sign In</span>
+          </Link>
+        </div>
       </form>
     </div>
   );

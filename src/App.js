@@ -20,9 +20,9 @@ function App() {
       <Router>
         <Header />
         <Routes className="overflow-y-auto">
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/" element={<SignIn />} />
+          <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path='/listing/:listingId' element={<Listing />} />
           <Route path='/search' element={<Search />} />

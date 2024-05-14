@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInFailure, signInSuccessfull } from '../Redux/userSlice';
 import Oauth from '../components/Oauth';
 import toast from 'react-hot-toast';
+import auth_bg from '../Assets/auth_background.jpg'
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -16,7 +17,7 @@ const SignIn = () => {
     password: ''
   });
   const [showPassword, setShowPassword] = useState(false);
-  const {loading} = useSelector(state => state.user);
+  const { loading } = useSelector(state => state.user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,7 +42,7 @@ const SignIn = () => {
         toast('Signin Successful');
         document.cookie = `access_token=${res.data.access_token}; path=/;`;
         dispatch(signInSuccessfull(res.data));
-        navigate('/home');
+        navigate('/');
       } else {
         toast(res.data);
         console.log(res);
@@ -55,16 +56,30 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5" onSubmit={handleSubmit}>
-        <h2 className="text-center text-3xl text-bold mb-6">Sign In</h2>
+    <div className="min-h-screen flex justify-center items-center">
+      <div
+        className="bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${auth_bg})`,
+          filter: 'blur(2px)',
+          opacity: 0.5,
+          position: 'fixed',
+          top: 2,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          
+        }}
+      ></div>
+      <form className=" rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5 z-10" onSubmit={handleSubmit}>
+        <h2 className="text-center text-black text-3xl text-bold mb-6">Sign In</h2>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
             Email
           </label>
           <div className="relative">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
               id="email"
               type="email"
               name="email"
@@ -76,12 +91,12 @@ const SignIn = () => {
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+          <label className="block text-black text-sm font-bold mb-2" htmlFor="password">
             Password
           </label>
           <div className="relative">
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black"
               id="password"
               type={showPassword ? 'text' : 'password'}
               name="password"
@@ -111,7 +126,7 @@ const SignIn = () => {
             )}
             Sign In
           </button>
-          <Oauth/>
+          <Oauth />
         </div>
         <div className='flex gap-2 mt-5'>
           <p>Dont have an account?</p>

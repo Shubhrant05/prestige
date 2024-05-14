@@ -156,14 +156,14 @@ export default function CreateListing() {
     return (
         <main className='p-3 max-w-4xl mx-auto'>
             <h1 className='text-3xl font-semibold text-center my-7'>
-                Add A Home
+                Add A Listing
             </h1>
             <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
                 <div className='flex flex-col gap-4 flex-1'>
                     <input
                         type='text'
                         placeholder='Name'
-                        className='border-b-2 focus:border-b-orange-600 outline-none  p-3 '
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black '
                         id='name'
                         maxLength='100'
                         minLength='10'
@@ -174,7 +174,7 @@ export default function CreateListing() {
                     <textarea
                         type='text'
                         placeholder='Description'
-                        className='border p-3 rounded-lg'
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                         id='description'
                         required
                         onChange={handleChange}
@@ -183,62 +183,92 @@ export default function CreateListing() {
                     <input
                         type='text'
                         placeholder='Address'
-                        className='border-b-2 focus:border-b-orange-600 outline-none  p-3'
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                         id='address'
                         required
                         onChange={handleChange}
                         value={formData.address}
                     />
                     <div className='flex gap-6 flex-wrap'>
-                        <div className='flex gap-2'>
-                            <input
-                                type='checkbox'
-                                id='sale'
-                                className='w-5'
-                                onChange={handleChange}
-                                checked={formData.type === 'sale'}
-                            />
-                            <span>Sell</span>
-                        </div>
+                        <input
+                            type='checkbox'
+                            id='sale'
+                            className='hidden' // Hide the default checkbox input
+                            onChange={handleChange}
+
+                            checked={formData.type === 'sale'}
+                        />
+                        <label
+                            htmlFor='sale'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.type === 'sale' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Sell
+                        </label>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='rent'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.type === 'rent'}
                             />
-                            <span>Rent</span>
+                            <label
+                                htmlFor='rent'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.type === 'rent' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Rent
+                            </label>
                         </div>
+                        {console.log(formData)}
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='parking'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.parking}
                             />
-                            <span>Parking spot</span>
+                            <label
+                                htmlFor='parking'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.parking ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Parking Spot
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='furnished'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.furnished}
                             />
-                            <span>Furnished</span>
+                            <label
+                                htmlFor='furnished'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.furnished ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Furnished
+                            </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='offer'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.offer}
                             />
-                            <span>Offer</span>
+                            <label
+                                htmlFor='offer'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.offer ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                    }`}
+                            >
+                                Offer
+                            </label>
                         </div>
                     </div>
                     <div className='flex justify-between flex-wrap gap-6'>
@@ -249,7 +279,7 @@ export default function CreateListing() {
                                 min='1'
                                 max='10'
                                 required
-                                className='border-b-2 focus:border-b-orange-600 outline-none  p-3'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.bedrooms}
                             />
@@ -262,7 +292,7 @@ export default function CreateListing() {
                                 min='1'
                                 max='10'
                                 required
-                                className='border-b-2 focus:border-b-orange-600 outline-none  p-3'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.bathrooms}
                             />
@@ -275,7 +305,7 @@ export default function CreateListing() {
                                 min='50'
                                 max='10000000'
                                 required
-                                className='border-b-2 focus:border-b-orange-600 outline-none  p-3'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.regularPrice}
                             />
@@ -317,7 +347,7 @@ export default function CreateListing() {
                         </span>
                         <p className='text-sm self-center'>
                             {imageUploadError ? (
-                                
+
                                 <span className='text-red-700'>
                                     Error Image upload (image must be less than 2 mb){toast.error('Error Image upload (image must be less than 2 mb)')}
                                 </span>
@@ -330,24 +360,45 @@ export default function CreateListing() {
                             )}
                         </p>
                     </p>
-                    <div className='flex gap-4'>
-                        <input
-                            onChange={(e) => setFiles(e.target.files)}
-                            className='p-3 border border-gray-300 rounded w-full'
-                            type='file'
-                            id='images'
-                            accept='image/*'
-                            multiple
-                        />
+                    <div className="flex gap-4 relative">
+                        <label htmlFor="images" className="cursor-pointer relative flex items-center justify-center w-full h-full p-3 border border-gray-300 rounded bg-white text-gray-700 shadow-sm focus-within:border-blue-500">
+                            <span className="truncate">Choose file(s)</span>
+                            <input
+                                onChange={(e) => setFiles(e.target.files)}
+                                type="file"
+                                id="images"
+                                accept="image/*"
+                                multiple
+                                className="absolute inset-0 opacity-0"
+                            />
+                            <svg
+                                className="h-6 w-6 absolute right-3 fill-current text-gray-500"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                            >
+                                <path
+                                    fillRule="evenodd"
+                                    d="M10 12a2 2 0 100-4 2 2 0 000 4z"
+                                    clipRule="evenodd"
+                                />
+                                <path
+                                    fillRule="evenodd"
+                                    d="M2 10c0-4.418 3.582-8 8-8s8 3.582 8 8-3.582 8-8 8-8-3.582-8-8zm15 0a7 7 0 10-14 0 7 7 0 0014 0z"
+                                    clipRule="evenodd"
+                                />
+                            </svg>
+                        </label>
                         <button
-                            type='button'
+                            type="button"
                             disabled={uploading}
                             onClick={handleImageSubmit}
-                            className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
+                            className="flex-shrink-0 p-3 border border-green-700 rounded bg-white text-green-700 uppercase hover:shadow-lg disabled:opacity-80"
                         >
                             {uploading ? 'Uploading...' : 'Upload'}
                         </button>
                     </div>
+
                     <p className='text-red-700 text-sm'>
                         {imageUploadError && imageUploadError}{imageUploadError && toast.error(imageUploadError)}
                     </p>
@@ -373,7 +424,7 @@ export default function CreateListing() {
                         ))}
                     <button
                         disabled={loading || uploading}
-                        className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
+                        className='p-3 bg-black text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
                     >
                         {loading ? 'Creating...' : 'Create listing'}
                     </button>

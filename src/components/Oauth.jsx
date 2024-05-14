@@ -26,7 +26,7 @@ const Oauth = () => {
       const data = await res.data;
       dispatch(signInSuccessfull(data));
       document.cookie = `access_token=${res.data.access_token}; path=/;`;
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       toast.error('Could not sign in with google');
       console.log('could not sign in with google', error);
@@ -37,7 +37,7 @@ const Oauth = () => {
     <button
       onClick={handleGoogleClick}
       type='button'
-      className='bg-none text-black text-bold p-3 rounded-lg uppercase hover:opacity-95'
+      className=' mt-2 bg-white w-full focus:outline-none  text-black font-bold py-2 px-4 rounded focus:shadow-outline relative'
     >
       Continue with google
     </button>

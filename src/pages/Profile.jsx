@@ -15,6 +15,7 @@ import { BACKEND_URL } from '../config';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import PropertyCard from '../components/PropertyCard';
+import profile_bg from '../Assets/profile.jpg'
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -161,110 +162,122 @@ const Profile = () => {
   }
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl font-semibold text-center my-7'>Profile</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
-        <input
-          onChange={(e) => setFile(e.target.files[0])}
-          type='file'
-          ref={fileRef}
-          hidden
-          accept='image/*'
-        />
-        <img
-          onClick={() => fileRef.current.click()}
-          src={formData.avatar || currentUser.avatar}
-          alt='profile'
-          className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
-        />
-        <p className='text-sm self-center'>
-          {fileUploadError ? (
-            <span className='text-red-700'>
-              Error Image upload (image must be less than 2 mb)
-            </span>
-          ) : filePerc > 0 && filePerc < 100 ? (
-            <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
-          ) : filePerc === 100 ? (
-            <span className='text-green-700'>Image successfully uploaded!</span>
-          ) : (
-            ''
-          )}
-        </p>
-        <input
-          type='text'
-          placeholder='username'
-          defaultValue={currentUser.username}
-          id='username'
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-          autoComplete='off'
-        />
-        <input
-          type='email'
-          placeholder='email'
-          id='email'
-          defaultValue={currentUser.email}
-          className='border p-3 rounded-lg'
-          onChange={handleChange}
-          autoComplete='off'
-        />
-        <input
-          type='password'
-          placeholder='password'
-          onChange={handleChange}
-          id='password'
-          className='border p-3 rounded-lg'
-          autoComplete='off'
-        />
-        <button
-          disabled={loading}
-          className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
-        >
-          {loading ? 'Loading...' : 'Update'}
-        </button>
-      </form>
-      <div className='flex flex-row gap-1 justify-between mt-4'>
-        <Link
-          className='bg-green-700 text-white w-1/2 p-3 rounded-lg uppercase text-center hover:opacity-95'
-          to={'/create-listing'}
-        >
-          Create Listing
-        </Link>
-        <button
-          className='bg-white text-green-700 border w-1/2 border-green-700 p-3 rounded-lg uppercase text-center hover:opacity-95'
-          onClick={() => handleShowListing()}
-        >
-          Show Listing
-        </button>
-      </div>
-      <div className='flex justify-between mt-5'>
-        <span
-          onClick={handleDeleteUser}
-          className='text-red-700 cursor-pointer flex gap-2 items-center font-semibold'
-        >
-          <BiTrash /> Delete account
-        </span>
-        <span onClick={handleSignOut} className='text-red-700 cursor-pointer flex gap-2 items-center font-semibold'>
-          <BiLogOut /> Sign out
-        </span>
-      </div>
-      <p className='text-red-700 mt-5'>{error ? error : ''}</p>
+    <div  style={{
+      backgroundImage: `url(${profile_bg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      height: '100%',
+      // filter: 'blur(5px)',
+      // opacity: 0.5,
+      backgroundRepeat: ''
+    }}>
+      <div className='p-3 max-w-lg mx-auto z-100' >
+        <h1 className='text-3xl text-black font-semibold text-center my-7'>Profile</h1>
+        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            type='file'
+            ref={fileRef}
+            hidden
+            accept='image/*'
+          />
+          <img
+            onClick={() => fileRef.current.click()}
+            src={formData.avatar || currentUser.avatar}
+            alt='profile'
+            className='rounded-full h-24 w-24 object-cover cursor-pointer self-center mt-2'
+          />
+          <p className='text-sm self-center'>
+            {fileUploadError ? (
+              <span className='text-red-700'>
+                Error Image upload (image must be less than 2 mb)
+              </span>
+            ) : filePerc > 0 && filePerc < 100 ? (
+              <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
+            ) : filePerc === 100 ? (
+              <span className='text-green-700'>Image successfully uploaded!</span>
+            ) : (
+              ''
+            )}
+          </p>
+          <input
+            type='text'
+            placeholder='Username'
+            defaultValue={currentUser.name}
+            id='username'
+            className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-white'
 
-      {showListing && showListing.length > 0 && (
-        <div className='flex flex-col gap-4'>
-          <h1 className='text-center mt-7 text-2xl font-semibold'>
-            Your Listings
-          </h1>
-          {showListing.map((listing) => (
-            <div
-              key={listing._id}
-              className='border rounded-lg p-3 flex justify-between items-center gap-4'
-            >
-              <PropertyCard property={listing} onDelete={() => handleListingDelete(listing._id)} />
-            </div>
-          ))}
+            onChange={handleChange}
+            autoComplete='off'
+          />
+          <input
+            type='email'
+            placeholder='Email'
+            id='email'
+            defaultValue={currentUser.email}
+            className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
+
+            onChange={handleChange}
+            autoComplete='off'
+          />
+          <input
+            type='password'
+            placeholder='Write new password'
+            onChange={handleChange}
+            id='password'
+            className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
+            autoComplete='off'
+          />
+          <button
+            disabled={loading}
+            className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
+          >
+            {loading ? 'Loading...' : 'Update'}
+          </button>
+        </form>
+        <div className='flex flex-row gap-1 justify-between mt-4'>
+          <Link
+            className='bg-green-700 text-white w-1/2 p-3 rounded-lg uppercase text-center hover:opacity-95'
+            to={'/create-listing'}
+          >
+            Create Listing
+          </Link>
+          <button
+            className='bg-white text-green-700 border w-1/2 border-green-700 p-3 rounded-lg uppercase text-center hover:opacity-95'
+            onClick={() => handleShowListing()}
+          >
+            Show Listing
+          </button>
         </div>
-      )}
+        <div className='flex justify-between mt-5'>
+          <span
+            onClick={handleDeleteUser}
+            className='text-black cursor-pointer flex gap-2 items-center font-semibold'
+          >
+            <BiTrash /> Delete account
+          </span>
+          <span onClick={handleSignOut} className='text-black cursor-pointer flex gap-2 items-center font-semibold'>
+            <BiLogOut /> Sign out
+          </span>
+        </div>
+        <p className='text-black mt-5'>{error ? error : ''}</p>
+
+        {showListing && showListing.length > 0 && (
+          <div className='flex flex-col gap-4'>
+            <h1 className='text-center mt-7 text-2xl font-semibold text-black'>
+              Your Listings
+            </h1>
+            {showListing.map((listing) => (
+              <div
+                key={listing._id}
+                className='border rounded-lg p-3 flex justify-between items-center gap-4 bg-slate-50'
+              >
+                <PropertyCard property={listing} onDelete={() => handleListingDelete(listing._id)} />
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

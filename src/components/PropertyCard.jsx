@@ -4,7 +4,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 const PropertyCard = ({ property, onDelete }) => {
   return (
-    <div className="w-full rounded overflow-hidden shadow-lg">
+    <div className="w-full rounded overflow-hidden shadow-lg bg-slate-50">
       <div className="flex items-center">
         <Link to={`/listing/${property?._id}`} className="mr-4">
           <img

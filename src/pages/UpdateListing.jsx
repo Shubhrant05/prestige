@@ -177,7 +177,7 @@ export default function CreateListing() {
                     <input
                         type='text'
                         placeholder='Name'
-                        className='border p-3 rounded-lg'
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                         id='name'
                         maxLength='62'
                         minLength='10'
@@ -188,7 +188,7 @@ export default function CreateListing() {
                     <textarea
                         type='text'
                         placeholder='Description'
-                        className='border p-3 rounded-lg'
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                         id='description'
                         required
                         onChange={handleChange}
@@ -197,7 +197,7 @@ export default function CreateListing() {
                     <input
                         type='text'
                         placeholder='Address'
-                        className='border p-3 rounded-lg'
+                        className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                         id='address'
                         required
                         onChange={handleChange}
@@ -208,51 +208,81 @@ export default function CreateListing() {
                             <input
                                 type='checkbox'
                                 id='sale'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.type === 'sale'}
                             />
-                            <span>Sell</span>
+                            <label
+                            htmlFor='sale'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.type === 'sale' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Sell
+                        </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='rent'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.type === 'rent'}
                             />
-                            <span>Rent</span>
+                           <label
+                            htmlFor='rent'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.type === 'rent' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Rent
+                        </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='parking'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.parking}
                             />
-                            <span>Parking spot</span>
+                            <label
+                            htmlFor='parking'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.parking? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Parking
+                        </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='furnished'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.furnished}
                             />
-                            <span>Furnished</span>
+                           <label
+                            htmlFor='furnished'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.furnished ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Furnished
+                        </label>
                         </div>
                         <div className='flex gap-2'>
                             <input
                                 type='checkbox'
                                 id='offer'
-                                className='w-5'
+                                className='hidden'
                                 onChange={handleChange}
                                 checked={formData.offer}
                             />
-                            <span>Offer</span>
+                            <label
+                            htmlFor='offer'
+                            className={`inline-block px-3 py-1 rounded-full cursor-pointer ${formData.offer ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
+                            Offer
+                        </label>
                         </div>
                     </div>
                     <div className='flex flex-wrap gap-6'>
@@ -263,7 +293,7 @@ export default function CreateListing() {
                                 min='1'
                                 max='10'
                                 required
-                                className='p-3 border border-gray-300 rounded-lg'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.bedrooms}
                             />
@@ -276,7 +306,7 @@ export default function CreateListing() {
                                 min='1'
                                 max='10'
                                 required
-                                className='p-3 border border-gray-300 rounded-lg'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.bathrooms}
                             />
@@ -289,7 +319,7 @@ export default function CreateListing() {
                                 min='50'
                                 max='10000000'
                                 required
-                                className='p-3 border border-gray-300 rounded-lg'
+                                className='bg-transparent border-b border-black w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline placeholder-black'
                                 onChange={handleChange}
                                 value={formData.regularPrice}
                             />
