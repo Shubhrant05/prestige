@@ -208,7 +208,7 @@ export default function Search() {
                             />
                             <label
                                 htmlFor='offer'
-                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.offer ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-700'
+                                className={`inline-block px-3 py-1 rounded-full cursor-pointer ${sidebardata.offer ? 'bg-green-800 text-white' : 'bg-gray-200 text-gray-700'
                                     }`}
                             >
                                 Offer

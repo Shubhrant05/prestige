@@ -34,7 +34,7 @@ const PropertyCard = ({ property, onDelete }) => {
         >
           Delete
         </button>
-        <Link to={`/update-listing/${property?._id}`} className="text-white w-1/2 uppercase items-center bg-blue-700 px-4 py-1 rounded focus:outline-none focus:shadow-outline hover:bg-blue-800 text-center">
+        <Link to={`/update-listing/${property?._id}`} className="text-black w-1/2 uppercase items-center  px-4 py-1 rounded focus:outline-none focus:shadow-outline border border-black  text-center">
           <button
           >
 

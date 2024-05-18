@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { HiOutlineMail } from 'react-icons/hi';
-import {  RiEyeFill, RiEyeOffFill } from 'react-icons/ri'; 
+import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
-import { useNavigate, Link} from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Oauth from '../components/Oauth';
 import toast from 'react-hot-toast';
-import auth_bg from '../Assets/auth_background.jpg'
+import auth_bg from '../Assets/sign_in_illustration.svg'
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ const SignUp = () => {
     password: '',
     confirmPassword: ''
   });
-  const [showPassword, setShowPassword] = useState(false); 
-  const [loading, setLoading] = useState(false); 
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +33,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); 
+    setLoading(true);
 
     try {
       let res = await axios.post(`${BACKEND_URL}/api/user/signup`, formData);
@@ -49,26 +49,18 @@ const SignUp = () => {
       toast(error.response.data);
       console.error(error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center items-center">
       <div
-        className="bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${auth_bg})`,
-          filter: 'blur(2px)',
-          opacity: 0.5,
-          position: 'fixed',
-          left: 0,
-          width: '100%',
-          height: '100%',
-          
-        }}
-      ></div>
-      <form className="rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5 z-10" onSubmit={handleSubmit}>
+        className="bg-cover bg-center w-1/2 hidden md:block "
+      >
+        <img src={auth_bg} alt="auth_bg" className="w-full h-full object-cover" />
+      </div>
+      <form className="rounded md:px-8 pt-6 pb-8 mb-4 w-4/5 md:w-1/2 z-10" onSubmit={handleSubmit}>
         <h2 className="text-center text-black text-3xl text-bold mb-6">Sign Up</h2>
         <div className="mb-4">
           <label className="block text-black text-sm font-bold mb-2" htmlFor="name">
@@ -123,9 +115,9 @@ const SignUp = () => {
               onClick={togglePasswordVisibility}
               className="absolute top-3 right-3 text-gray-500"
             >
-              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />} 
+              {showPassword ? <RiEyeOffFill /> : <RiEyeFill />}
             </button>
-            
+
           </div>
         </div>
         <div className="mb-4">

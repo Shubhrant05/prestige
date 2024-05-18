@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signInStart, signInFailure, signInSuccessfull } from '../Redux/userSlice';
 import Oauth from '../components/Oauth';
 import toast from 'react-hot-toast';
-import auth_bg from '../Assets/auth_background.jpg'
+import auth_bg from '../Assets/sign_in_illustration.svg'
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -56,21 +56,13 @@ const SignIn = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div className="min-h-screen flex flex-row justify-center items-center">
       <div
-        className="bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${auth_bg})`,
-          filter: 'blur(2px)',
-          opacity: 0.5,
-          position: 'fixed',
-          left: 0,
-          width: '100%',
-          height: '100%',
-          
-        }}
-      ></div>
-      <form className=" rounded px-8 pt-6 pb-8 mb-4 lg:w-2/5 w-4/5 z-10" onSubmit={handleSubmit}>
+        className="bg-cover bg-center w-1/2 hidden md:block "
+      >
+        <img src={auth_bg} alt="auth_bg" className="w-full h-full object-cover" />
+      </div>
+      <form className=" rounded md:px-8 pt-6 pb-8 mb-4 w-4/5 md:w-1/2  z-10" onSubmit={handleSubmit}>
         <h2 className="text-center text-black text-3xl text-bold mb-6">Sign In</h2>
         <div className="mb-4">
           <label className="block text-black text-sm font-bold mb-2" htmlFor="email">
@@ -115,7 +107,7 @@ const SignIn = () => {
         </div>
         <div className="flex items-center justify-between flex-col">
           <button
-            className="bg-gray-700 w-full focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline relative"
+            className="bg-gray-700 w-4/5 mt-4 focus:outline-none focus:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:shadow-outline relative"
             type="submit"
           >
             {loading && (
@@ -127,7 +119,7 @@ const SignIn = () => {
           </button>
           <Oauth />
         </div>
-        <div className='flex gap-2 mt-5'>
+        <div className='gap-2 mt-5'>
           <p>Dont have an account?</p>
           <Link to={'/signup'}>
             <span className='text-blue-700'>Sign up</span>
