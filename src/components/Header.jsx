@@ -31,7 +31,7 @@ const Header = () => {
         <div className="flex items-center">
           <div className="mr-4">
             <Link to="/" className="text-xl font-bold">
-              Prestige Properties
+              Jimmy Properties
             </Link>
           </div>
           <form
@@ -74,7 +74,7 @@ const Header = () => {
         </div>
       </div>
       {isOpen && (
-        <div className="md:hidden bg-black">
+        <div className="md:hidden bg-black ">
           <div className="flex flex-col items-center">
             <Link
               to="/"

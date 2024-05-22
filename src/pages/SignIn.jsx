@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
+import { RiEyeFill, RiEyeOffFill } from 'react-icons/ri';
 import { BACKEND_URL } from '../config';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -48,8 +48,11 @@ const SignIn = () => {
         console.log(res);
       }
     } catch (error) {
-      toast(error.response.data);
-      dispatch(signInFailure(error.response.data));
+      if (error) {
+
+        toast(error?.response?.data);
+        dispatch(signInFailure(error.response.data));
+      }
     } finally {
       console.log('Signin completed');
     }
