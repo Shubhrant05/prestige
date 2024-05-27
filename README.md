@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Prestige Estate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+Welcome to **Prestige Estate**, a sophisticated real estate website meticulously crafted as part of my learning journey and hands-on application of modern web technologies. This project showcases my proficiency in a robust tech stack. Spanning approximately 15 days of dedicated development, Prestige Estate is not only fully functional but also responsive, ensuring a seamless experience across devices. Dive in to explore the seamless integration and powerful features that bring this project to life.
 
-In the project directory, you can run:
+## Tech Stack
 
-### `npm start`
+### Frontend
+- **ReactJS**
+- **JavaScript**
+- **TailwindCSS**
+- **Redux**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend
+- **NodeJS**
+- **ExpressJS**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Database
+- **MongoDB**
 
-### `npm test`
+### Authentication
+- **Google OAuth**
+- **Firebase**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Frontend Specifications
 
-### `npm run build`
+The frontend of **Prestige Estate** is designed to provide an intuitive and seamless user experience. Below are the key components and features of the frontend:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Authentication
+- **Sign In Page**: Allows existing users to log in securely.
+- **Sign Up Page**: Enables new users to register using JWT authentication.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Main Pages
+- **Landing Page**: Displays properties in three categories: Sale, Rent, and Offers. Users can easily browse through featured listings.
+- **About Us Page**: Provides a brief overview of the company and its mission.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Property Listings
+- **Listings Page**: Showcases all available properties. Users can search with keywords and filter by parameters such as Sale, Rent, Offers, and Amenities. Sorting options are available to organize listings by different values.
 
-### `npm run eject`
+### User Profile
+- **Profile Page**: Users can update their details and profile picture. This page also allows users to view and manage their listings.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Listing Management
+- **Create Listing Page**: Users are redirected to a form where they can add details and pictures for a new listing.
+- **Update Listing Page**: Allows users to update details of their existing listings.
+- **Listing Details Page**: Provides comprehensive information about a listing. Includes a "Contact Landlord" feature, enabling users to send emails directly to the property owner.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Backend Specifications
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The backend of **Prestige Estate** is powered by a suite of robust APIs developed using **Node.js** and **Express.js**, with **MongoDB** serving as the database. These APIs ensure smooth and efficient handling of data and provide the following functionalities:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### API Features
+- **CRUD Operations for Users**: Comprehensive APIs to create, read, update, and delete user information.
+- **CRUD Operations for Listings**: Full set of APIs to manage property listings, including creation, retrieval, updating, and deletion of listings.
 
-## Learn More
+### API Documentation
+For detailed information and to explore the available endpoints, please refer to the [Postman Collection](https://blue-resonance-76334.postman.co/workspace/New-Team-Workspace~2b42d5ed-22f9-4a59-9d40-8861d7957cea/collection/18860320-86ce470b-8474-4928-8972-2eb8636b0312?action=share&creator=18860320)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Deployment Details
 
-### Code Splitting
+The **Prestige Estate** project is deployed to ensure accessibility and performance. Here are the deployment specifics:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Frontend
+The frontend is hosted on **Vercel**, providing a fast and reliable platform for static site hosting and serverless functions.
 
-### Analyzing the Bundle Size
+### Backend
+The backend is deployed on **Render** using their free server tier. Please note that it may take some time to boot up when accessed after a period of inactivity.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+---
 
-### Making a Progressive Web App
+Feel free to explore the [live application](https://prestige-gamma.vercel.app/) and experience its features in real-time.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## How to Run on Local Server
 
-### Advanced Configuration
+### Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. **Fork and Clone the Repository**
+   - Fork the [frontend repository](https://github.com/Shubhrant05/prestige) to your GitHub account.
+   - Clone the forked repository to your local machine:
+     ```sh
+     git clone https://github.com/<your-username>/prestige.git
+     ```
+   
+2. **Set Up the Codebase**
+   - Navigate to the project directory:
+     ```sh
+     cd prestige
+     ```
+   - Install the required dependencies:
+     ```sh
+     npm install
+     ```
+   
+3. **Run the Development Server**
+   - Start the frontend development server:
+     ```sh
+     npm start
+     ```
+   - The application should now be running on `http://localhost:3000`.
 
-### Deployment
+### Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+1. **Fork and Clone the Repository**
+   - Fork the [backend repository](https://github.com/Shubhrant05/prestige_backend) to your GitHub account.
+   - Clone the forked repository to your local machine:
+     ```sh
+     git clone https://github.com/<your-username>/prestige_backend.git
+     ```
 
-### `npm run build` fails to minify
+2. **Set Up the Codebase**
+   - Navigate to the project directory:
+     ```sh
+     cd prestige_backend
+     ```
+   - Install the required dependencies:
+     ```sh
+     npm install
+     ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+3. **Check Environment Variables**
+
+
+4. **Run the Development Server**
+   - Start the backend development server:
+     ```sh
+     npm start
+     ```
+   - The backend server should now be running on `http://localhost:5000` or the port specified in your environment variables.
