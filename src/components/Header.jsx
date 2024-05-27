@@ -31,7 +31,7 @@ const Header = () => {
         <div className="flex items-center">
           <div className="mr-4">
             <Link to="/" className="text-xl font-bold">
-              Jimmy Properties
+              Prestige Properties
             </Link>
           </div>
           <form
